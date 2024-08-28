@@ -22,14 +22,14 @@ def create_dataset(component, filename):
     tds = data[0].find_all('td')
     f.write(th.get('data-stat'))
     for td in tds:
-        f.write(', ' + td.get('data-stat'))
+        f.write(',' + td.get('data-stat'))
 
     f.write('\n')
 
     for team_data in data:
         f.write(team_data.find('th').find('a').get_text())
         for td in team_data.find_all('td'):
-            f.write(', ' + td.get_text())
+            f.write(',' + td.get_text())
         f.write('\n')
 
 #Create dataset for passes
@@ -39,7 +39,7 @@ create_dataset('stats_squads_passing_for', '2024-passes.csv')
 create_dataset('stats_squads_defense_for', '2024-defensive-actions.csv')
 
 # Create dataset for possession 
-create_dataset('stats_squads_possession_for', '2024-possesion.csv')
+create_dataset('stats_squads_possession_for', '2024-possession.csv')
 
 # Create dataset for shoots
 create_dataset('stats_squads_shooting_for', '2024-shoots.csv')
