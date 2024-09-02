@@ -36,7 +36,7 @@ def create_dataset(component, filename):
 create_dataset('stats_squads_passing_for', '2024-passes.csv') 
 
 # Create dataset for defensive actions
-create_dataset('stats_squads_defense_for', '2024-defensive-actions.csv')
+# create_dataset('stats_squads_defense_for', '2024-defensive-actions.csv')
 
 # Create dataset for possession 
 create_dataset('stats_squads_possession_for', '2024-possession.csv')

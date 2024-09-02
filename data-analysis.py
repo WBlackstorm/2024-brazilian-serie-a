@@ -10,7 +10,6 @@ df_defense = pd.read_csv('2024-defense.csv', sep=',')
 df_defensive_actions = pd.read_csv('2024-defensive-actions.csv', sep=',')
 df_passes = pd.read_csv('2024-passes.csv', sep=',')
 
-
 # Shoots
 data_shoots = {'team': [], 'type': [], 'amount': []}
 
@@ -67,11 +66,23 @@ for item in df_passes.values:
     data_passes_types['type'].append('Médio')
     data_passes_types['amount'].append(item[12])
 
+# Defense
+data_defense = {'team': [], 'type': [], 'amount': []}
+
+for item in df_defense.values:
+    data_defense['team'].append(item[0])
+    data_defense['type'].append('Gols sofridos')
+    data_defense['amount'].append(item[1])
+    data_defense['team'].append(item[0])
+    data_defense['type'].append('Chutes no gol')
+    data_defense['amount'].append(item[2])
+
 df_data_shoots = pd.DataFrame(data=data_shoots)
 df_data_possession = pd.DataFrame(data=data_possession)
 df_data_passes = pd.DataFrame(data=data_passes)
 df_data_completed_passes = pd.DataFrame(data=data_completed_passes)
 df_data_passes_types = pd.DataFrame(data=data_passes_types)
+df_data_defense = pd.DataFrame(data=data_defense)
 
 chart_shoot = alt.Chart(df_data_shoots, title='Chutes ao gol', width=500).mark_bar().encode(
     x=alt.X('amount', title=None),
@@ -112,14 +123,30 @@ chart_passes_types = alt.Chart(df_data_passes_types, title='Tipos de passe', wid
         orient='bottom', title=None)
 )
 
+chart_defense = alt.Chart(df_data_defense, title='Chutes do adversário', width=500).mark_bar().encode(
+    x=alt.X('amount', title=None),
+    y=alt.Y("team", title='Clubes', axis=alt.Axis(labels=True)),
+    color=alt.Color('type', scale=alt.Scale(range=['lightgreen', 'dodgerblue'])).legend(
+        orient='bottom', title=None)
+)
+
 st.set_page_config(layout='wide')
+
+st.write(
+    """
+    # Campeonato Brasileiro 2024
+    """
+)
+
+
 first_1, second_1 = st.columns(2)
 first_2, second_2 = st.columns(2)
 first_3, second_3 = st.columns(2)
+# first_4, second_4 = st.columns(2)
 
 first_1.write(chart_shoot)
-second_1.write(chart_possession)
+second_1.write(chart_percent_passes + text_max)
 first_2.write(chart_passes)
-second_2.write(chart_percent_passes + text_max)
-first_3.write(chart_passes_types)
-# second_3.write(chart_percent_passes + text_max)
+second_2.write(chart_passes_types)
+first_3.write(chart_defense)
+second_3.write(chart_possession)
