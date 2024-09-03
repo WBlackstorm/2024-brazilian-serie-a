@@ -55,8 +55,8 @@ rpds-py==0.20.0
 scipy==1.14.0rc1
 six==1.16.0
 smmap==5.0.1
-snowflake-connector-python==3.12.1
-snowflake-snowpark-python==1.9.1
+# snowflake-connector-python==3.12.1
+# snowflake-snowpark-python==1.9.1
 sortedcontainers==2.4.0
 soupsieve==2.6
 statsmodels==0.14.1
